@@ -1,26 +1,31 @@
 package com.ejercicios.spring.response;
 
 import java.time.LocalDate;
-import java.util.Date;
 
+public class PersonE3 {
 
-/*Creación de la clase PersonRest, que contendrá los
-atributos de cada persona.*/
-public class PersonRest {
-    private String firstName;
+    private int dni;
+    private String name;
     private String firstSurName;
     private String secondSurName;
     private String completeName;
     private LocalDate birthDate;
-
     private String gender;
 
-    public String getFirstName() {
-        return firstName;
+    public int getDni() {
+        return dni;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setDni(int dni) {
+        this.dni = dni;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getFirstSurName() {
@@ -43,8 +48,8 @@ public class PersonRest {
         return completeName;
     }
 
-    public void setCompleteName(String firstName, String firstSurName, String secondSurName) {
-        this.completeName = firstName+" " +firstSurName+ " " +secondSurName;
+    public void setCompleteName() {
+        this.completeName = this.getName()+" "+this.getFirstSurName()+" "+this.getSecondSurName();
     }
 
     public LocalDate getBirthDate() {
@@ -61,16 +66,5 @@ public class PersonRest {
 
     public void setGender(String gender) {
         this.gender = gender;
-    }
-
-    @Override
-    public String toString(){
-        return "****Datos de la persona****" +
-                "\nNombre: " + getFirstName()+
-                "\nPrimer Apellido: " + getFirstSurName()+
-                "\nSegundo Apellido: " + getSecondSurName()+
-                "\nFecha de Nacimiento: " + getBirthDate()+
-                "\nSexo: " + getGender()+
-                "\n****************************";
     }
 }
