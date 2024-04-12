@@ -1,5 +1,5 @@
 package com.ejercicios.spring.controller;
-import com.ejercicios.spring.response.PersonE3;
+import com.ejercicios.spring.response.Persona;
 import com.ejercicios.spring.response.PersonRest;
 import com.ejercicios.spring.response.Personas;
 import org.springframework.http.HttpStatus;
@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.List;
 
 //Anotación para convertirlo en servicio REST
 @RestController
@@ -16,10 +15,10 @@ import java.util.List;
 public class PersonController {
 
     //Variable global de tipo PersonRest, donde se añadirán los datos que se pasen por URL
-    PersonRest person;
+    PersonRest personRest;
 
     Personas persons = new Personas();
-    PersonE3 personE3;
+    Persona persona;
 
     //Ejercicio 1
     //@GetMapping para manejar las peticiones GET
@@ -56,21 +55,21 @@ public class PersonController {
 
         //Nueva instancia de la clase PersonRest, variable person
         //Los datos se añaden a través de los Setter creados en la clase
-        person = new PersonRest();
-        person.setFirstName(name);
-        person.setFirstSurName(firstSurname);
-        person.setSecondSurName(secondSurname);
-        person.setCompleteName(name, firstSurname, secondSurname);
-        person.setBirthDate(birthDate);
-        person.setGender(gender);
+        personRest = new PersonRest();
+        personRest.setFirstName(name);
+        personRest.setFirstSurName(firstSurname);
+        personRest.setSecondSurName(secondSurname);
+        personRest.setCompleteName(name, firstSurname, secondSurname);
+        personRest.setBirthDate(birthDate);
+        personRest.setGender(gender);
 
 
         //Syso para mostrar la información en la consola, llamando al método toString adaptado en la clase PersonRest
-        System.out.println(person.toString());
+        System.out.println(personRest.toString());
 
 
         //Devolvemos una instancia de ResponseEntity, que contiene la persona creada y el estado de la solicitud
-        return new ResponseEntity<PersonRest>(person, HttpStatus.OK);
+        return new ResponseEntity<PersonRest>(personRest, HttpStatus.OK);
 
         //URL utilizada: localhost:8080/persons?name=Raúl&firstSurname=Montes&secondSurname=Román&birthDate=1982-06-22&gender=Hombre
 
@@ -79,36 +78,36 @@ public class PersonController {
     //Ejercicio 3
 
     //Método donde creo las 10 personas, a través de un bucle for con ligeros cambios entre cada entrada.
-    public ArrayList<PersonE3> createList(){
+    public ArrayList<Persona> createList(){
 
         for(int i=0; i<10; i++){
-            personE3 = new PersonE3();
-            personE3.setDni(i);
-            personE3.setName("Raúl " + i);
-            personE3.setFirstSurName("Montes " + i);
-            personE3.setSecondSurName("Román " + i);
-            personE3.setCompleteName();
-            personE3.setBirthDate("1982-06-" + (15+i));
-            personE3.setGender("Hombre");
+            persona = new Persona();
+            persona.setDni(i);
+            persona.setName("Raúl " + i);
+            persona.setFirstSurName("Montes " + i);
+            persona.setSecondSurName("Román " + i);
+            persona.setCompleteName();
+            persona.setBirthDate("1982-06-" + (15+i));
+            persona.setGender("Hombre");
 
             //Las iteraciones del bucle las añado al ArrayList que se crea con la clase Personas.
-            persons.addPerson(personE3);
+            persons.addPerson(persona);
         }
 
         //Devuelvo la lista
-        return (ArrayList<PersonE3>) persons.getList();
+        return (ArrayList<Persona>) persons.getList();
     }
 
     //Método GET para obtener una persona concreta a través del DNI
     @GetMapping(path="/{dni}")
-    public ResponseEntity<PersonE3> getPersonE3(@PathVariable int dni){
+    public ResponseEntity<Persona> getPersonE3(@PathVariable int dni){
         //Creo un ArrayList y le asigno el valor que devuelve el método createList, donde hemos creado las 10 personas.
-        ArrayList<PersonE3> lista = createList();
+        ArrayList<Persona> lista = createList();
 
         //Bucle for each para encontrar la persona conceta por dni.
         //Si está el DNI devuelve el resultado con estado OK.
-        for(PersonE3 p: lista){
-            if(p.getDni() == dni) return new ResponseEntity<PersonE3>(p, HttpStatus.OK);
+        for(Persona p: lista){
+            if(p.getDni() == dni) return new ResponseEntity<Persona>(p, HttpStatus.OK);
         }
 
         //Si no ha encontrado nada, devuelve el estaod NO_CONTENT
@@ -117,14 +116,14 @@ public class PersonController {
 
     //Método PUT para actualizar la persona, si existe, cuyo dni coincida con el parámetro pasado por URL
     @PutMapping(path="/{dni}")
-    public PersonE3 updatePerson(@PathVariable int dni, @RequestBody PersonE3 personDetails){
+    public Persona updatePerson(@PathVariable int dni, @RequestBody Persona personDetails){
 
         //Creo un ArrayList y le asigno el valor de la lista creada en el método createList()
-        ArrayList<PersonE3> lista = createList();
-        PersonE3 person = new PersonE3();
+        ArrayList<Persona> list = createList();
+        Persona personUpdate = new Persona();
 
         //Recorro la lista
-        for(PersonE3 p: lista){
+        for(Persona p: list){
             /*Si el dni pasado por parámetro con el dni de alguna iteración de la lista,
             se reasignarán los valores con lo que indiquemos en Postman
              */
@@ -138,13 +137,13 @@ public class PersonController {
                 p.setGender(personDetails.getGender());
 
                 //Le asigno la iteración ya modificada a la variable creada al inicio del método
-                person = p;
+                personUpdate = p;
 
             }
         }
 
         //Devuelvo la persona que hemos buscado, ya actualizada.
-        return person;
+        return personUpdate;
     }
 
 

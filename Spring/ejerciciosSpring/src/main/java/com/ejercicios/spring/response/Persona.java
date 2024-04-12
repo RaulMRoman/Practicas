@@ -2,7 +2,7 @@ package com.ejercicios.spring.response;
 
 import java.time.LocalDate;
 
-public class PersonE3 {
+public class Persona {
 
     private int dni;
     private String name;

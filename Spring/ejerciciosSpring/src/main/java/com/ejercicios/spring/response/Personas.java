@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Personas {
-    private List<PersonE3> list;
+    private List<Persona> list;
 
     public Personas(){
         list = new ArrayList<>();
     }
 
-    public void addPerson(PersonE3 person){
+    public void addPerson(Persona person){
         list.add(person);
     }
 
-    public List<PersonE3> getList() {
+    public List<Persona> getList() {
         return list;
     }
 }
