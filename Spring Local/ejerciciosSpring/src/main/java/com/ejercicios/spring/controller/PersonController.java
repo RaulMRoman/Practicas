@@ -15,10 +15,9 @@ import java.util.ArrayList;
 public class PersonController {
 
     //Variable global de tipo PersonRest, donde se añadirán los datos que se pasen por URL
-    PersonRest personRest;
-
-    Personas persons = new Personas();
-    Persona persona;
+    PersonRest personRest; //Para Ejercicios 1 y 2
+    Personas persons = new Personas(); //Para Ejercicio 3
+    Persona persona; //Para Ejercicio 3
 
     //Ejercicio 1
     //@GetMapping para manejar las peticiones GET
@@ -52,7 +51,6 @@ public class PersonController {
                                        @RequestParam("birthDate") String birthDate,
                                        @RequestParam("gender") String gender) {
 
-
         //Nueva instancia de la clase PersonRest, variable person
         //Los datos se añaden a través de los Setter creados en la clase
         personRest = new PersonRest();
@@ -63,10 +61,8 @@ public class PersonController {
         personRest.setBirthDate(birthDate);
         personRest.setGender(gender);
 
-
         //Syso para mostrar la información en la consola, llamando al método toString adaptado en la clase PersonRest
         System.out.println(personRest.toString());
-
 
         //Devolvemos una instancia de ResponseEntity, que contiene la persona creada y el estado de la solicitud
         return new ResponseEntity<PersonRest>(personRest, HttpStatus.OK);
@@ -138,10 +134,8 @@ public class PersonController {
 
                 //Le asigno la iteración ya modificada a la variable creada al inicio del método
                 personUpdate = p;
-
             }
         }
-
         //Devuelvo la persona que hemos buscado, ya actualizada.
         return personUpdate;
     }
