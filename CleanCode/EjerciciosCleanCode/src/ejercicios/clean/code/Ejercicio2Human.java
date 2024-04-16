@@ -2,6 +2,8 @@ package ejercicios.clean.code;
 
 public class Ejercicio2Human {
 
+    //Consultar si debería haber realizado interfaz
+
     //He dividido el ejercicio en 2 clases, Ejercicio2Human (ésta) y Ejercicio2Address,
     //donde irán los datos relacionados con la dirección
     private final String name, age;
@@ -27,7 +29,7 @@ public class Ejercicio2Human {
         Ejercicio2Human human = new Ejercicio2Human("Raúl", "41");
         String obtainingHuman = human.getHuman();
 
-        System.out.println(human.getHuman() + ", "+ obtainingAddress);
+        System.out.println(obtainingHuman + ", "+ obtainingAddress);
 
 
     }

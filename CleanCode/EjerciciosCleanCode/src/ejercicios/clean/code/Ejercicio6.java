@@ -8,9 +8,9 @@ public class Ejercicio6 {
 
     Scanner teclado;
     private final ArrayList<String> randomList = new ArrayList<>();
-    private ArrayList<String> chosenList = new ArrayList<>();
-    private int tryings=0;
-    private int white, black;
+
+    private int attempts=0;
+    private int white;
     private String color1, color2, color3, color4;
 
     //Método con el que obtenemos la lista de colores en orden aleatorio.
@@ -47,40 +47,47 @@ public class Ejercicio6 {
 
     //Método para comprobar las dos listas y actualizar el conteo de bolas blancas y negras.
     public void checkingLists(){
-        this.chosenList = new ArrayList<>(Arrays.asList(color1, color2, color3, color4));
+        ArrayList<String> chosenList = new ArrayList<>(Arrays.asList(color1, color2, color3, color4));
         for (int i = 0; i < chosenList.size(); i++) {
-
-            if (this.chosenList.get(i).equals(this.randomList.get(i))) this.white++;
-            else if (this.randomList.contains(this.chosenList.get(i))) this.black++;
+            if (chosenList.get(i).equals(this.randomList.get(i))){
+                this.white++;
+                System.out.print("Blanca ");
+            }
+            else if (this.randomList.contains(chosenList.get(i))){
+                //this.black++; Funcionamiento anterior
+                System.out.print("Negra ");
+            }else{
+                System.out.print("? ");
+            }
         }
-        System.out.println("Bolas Blancas: " + this.white + "\nBolas Negras: " + this.black);
+        //System.out.println("\nBolas Blancas: " + this.white + "\nBolas Negras: " + this.black); Funcionamiento anterior
     }
 
     //Método para actualizar y mostrar el número de intentos
-    public void updateTryings(){
-        this.tryings++;
-        System.out.println("Número de intentos: " + this.tryings+"\n");
+    public void updateAttempts(){
+        this.attempts++;
+        System.out.println("\nNúmero de intentos: " + this.attempts+"\n");
     }
 
     //Método para mostrar los resultados finales (Victoa o Derrota)
     public void results(){
         if(this.white==4) System.out.println("¡Enhorabuena! Has ganado. " +
-                "La secuencia correcta es: " + randomList.toString());
+                "La secuencia correcta es: " + randomList);
 
-        if(this.tryings==10 & this.white<4) System.out.println("Lo sentimos. Has llegado al máximo de intentos"+
-                "La secuencia correcta es: " + randomList.toString());
+        if(this.attempts==10 & this.white<4) System.out.println("Lo sentimos. Has llegado al máximo de intentos"+
+                "La secuencia correcta es: " + randomList);
     }
 
     //Método general donde se llama al resto de métodos con los que se forman la mecánica del juego.
     public void checkChosenColours(){
         System.out.println("Elige los colores");
 
-        while(this.tryings<10 && this.white<4) {
+        while(this.attempts<10 && this.white<4) {
             this.white=0;
-            this.black=0;
+            //this.black=0;
             userSelectsColors();
             checkingLists();
-            updateTryings();
+            updateAttempts();
             results();
         }
     }

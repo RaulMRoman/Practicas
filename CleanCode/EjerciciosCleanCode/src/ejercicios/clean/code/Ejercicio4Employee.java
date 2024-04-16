@@ -19,7 +19,4 @@ public class Ejercicio4Employee {
         this.awards = awards;
     }
 
-    public float getMonthlySalary(float yearlySalary, float awards){
-        return (yearlySalary+awards)/12;
-    }
 }
