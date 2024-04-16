@@ -19,8 +19,8 @@ public class Ejercicio6 {
         // Si fueran más elementos, mejor añadir con list.add
         ArrayList<String> coloursList = new ArrayList<>(Arrays.asList("Azul", "Rojo", "Verde", "Amarillo"));
 
-        while(randomList.size()<4){
-            randomList.add(coloursList.get((int) (Math.random()*4)).toLowerCase());
+        while(this.randomList.size()<4){
+            this.randomList.add(coloursList.get((int) (Math.random()*4)).toLowerCase());
         }
 
         getRandomList();
@@ -29,7 +29,7 @@ public class Ejercicio6 {
     //Método para mostrar la lista de colores en orden aleatorio, para hacer comprobacioens
     //En el juego real no habría que mostrarlo
     public void getRandomList(){
-        for(String colour: randomList) System.out.print(colour+" ");
+        for(String colour: this.randomList) System.out.print(colour+" ");
         System.out.println();
     }
 
@@ -72,10 +72,10 @@ public class Ejercicio6 {
     //Método para mostrar los resultados finales (Victoa o Derrota)
     public void results(){
         if(this.white==4) System.out.println("¡Enhorabuena! Has ganado. " +
-                "La secuencia correcta es: " + randomList);
+                "La secuencia correcta es: " + this.randomList);
 
-        if(this.attempts==10 & this.white<4) System.out.println("Lo sentimos. Has llegado al máximo de intentos"+
-                "La secuencia correcta es: " + randomList);
+        if(this.attempts==10 & this.white<4) System.out.println("Lo sentimos. Has llegado al máximo de intentos. "+
+                "La secuencia correcta es: " + this.randomList);
     }
 
     //Método general donde se llama al resto de métodos con los que se forman la mecánica del juego.
