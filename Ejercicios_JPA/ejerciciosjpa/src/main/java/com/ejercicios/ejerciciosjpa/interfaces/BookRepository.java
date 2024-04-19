@@ -13,14 +13,20 @@ import java.util.List;
 @Repository
 public interface BookRepository extends JpaRepository<Books, Integer> {
 
-    //Método con SELECT añadido en la interfaz a través de @Query (buscar por ISBN)
-    @Query(value = "SELECT b FROM Books b WHERE b.isbn = ?1")
-    Books findByIsbn(Integer isbn);
+    //Método con SELECT añadido en la interfaz a través de @Query (Buscar los libros lanzados con
+    // fecha superior a un año concreto)
+    @Query(value = "SELECT b FROM Books b WHERE b.year > ?1")
+    List<Books> findByYearQuery(Year year);
 
+    //Mismo funcionamiento con nombre del método
+    List<Books> findByYearGreaterThan(Year year);
+
+    //Método para buscar por nombre de la editorial
     @Query(value = "SELECT b FROM Books b JOIN b.publisher p" +
             " WHERE p.publisherName = ?1")
     List<Books> findByPublisher(String name);
 
+    //Método para buscar por nombre de la editorial y año concreto
     @Query(value = "SELECT b FROM Books b JOIN b.publisher p" +
             " WHERE p.publisherName = ?1 AND b.year = ?2")
     List<Books> findByPublisherAndYear(String name, Year year);
@@ -29,9 +35,5 @@ public interface BookRepository extends JpaRepository<Books, Integer> {
     //Método de búsqueda añadido en la interfaz a través de nombre de método (buscar por título)
     List<Books> findByTitle(String title);
 
-    //Método de búsqueda añadido para buscar por año
-    List<Books> findByYear(Year year);
 
-    //Añadido para buscar por editorial
-    //List<Books> findByPublisher(Publishers publisher);
 }

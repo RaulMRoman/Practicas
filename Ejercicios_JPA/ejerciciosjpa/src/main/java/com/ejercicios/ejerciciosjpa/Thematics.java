@@ -2,12 +2,13 @@ package com.ejercicios.ejerciciosjpa;
 
 import jakarta.persistence.*;
 
+//Establecemos como entidad y tabla
 @Entity
 @Table(
         name = "thematics"
 )
 public class Thematics {
-
+    //Secuencia para el id autoincremental. El resto de apartados se indican sólo como columna con sus características
     @Id
     @SequenceGenerator(
             name = "thematic_sequence",
@@ -33,10 +34,13 @@ public class Thematics {
     public Thematics(){
 
     }
+
+    //Constructor con todos los datos
     public Thematics(String category) {
         this.category = category;
     }
 
+    //Getters y Setters
     public Integer getId() {
         return id;
     }

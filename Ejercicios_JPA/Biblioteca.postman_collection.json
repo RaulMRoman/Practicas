@@ -1,0 +1,182 @@
+{
+	"info": {
+		"_postman_id": "4d8d847d-7bb8-4b45-8b41-8d703a0df679",
+		"name": "Biblioteca",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34213799"
+	},
+	"item": [
+		{
+			"name": "BuscarAutores",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "BuscarTemáticas",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "BuscarEditoriales",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "BucarLibros",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "BuscarLibroQueryAñoSuperior",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "BuscarLibroGreaterThanYear Copy",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "BucarLibroPorEditorial",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "BucarLibroPorEditorialAño",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "InsertLibro",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \r\n    \"publisherName\": \"Anagrama\",\r\n    \"companyName\": \"Anagrama Editorial\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/publishers",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"publishers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "InsertarAutor",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \r\n    \"firstName\": \"Anagrama\",\r\n    \"lastNames\": \"Anagrama Editorial\",\r\n    \"birthDate\": \"1997-07-07\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/authors",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"authors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "InsertarEditorial",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \r\n    \"publisherName\": \"Anagrama\",\r\n    \"companyName\": \"Anagrama Editorial\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/publishers",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"publishers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "InsertarTemática",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \r\n    \"publisherName\": \"Anagrama\",\r\n    \"companyName\": \"Anagrama Editorial\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/publishers",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"publishers"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

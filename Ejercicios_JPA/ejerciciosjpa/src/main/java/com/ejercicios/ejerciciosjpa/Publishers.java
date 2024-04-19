@@ -2,12 +2,14 @@ package com.ejercicios.ejerciciosjpa;
 
 import jakarta.persistence.*;
 
+//Establecemos como Entidad y Tabla
 @Entity
 @Table(
         name = "publishers"
 )
 public class Publishers {
 
+    //Secuencia para el id autoincremental. El resto de apartados se indican sólo como columna con sus características
     @Id
     @SequenceGenerator(
             name = "publisher_sequence",
@@ -40,10 +42,14 @@ public class Publishers {
     public Publishers(){
 
     }
+
+    //Constructor con todos los datos
     public Publishers(String publisherName, String companyName){
         this.publisherName = publisherName;
         this.companyName = companyName;
     }
+
+    //Getters y Setters
 
     public Integer getId() {
         return id;

@@ -24,7 +24,6 @@ public class BookService {
 
     //Todos los siguientes métodos los recogerá BookController
 
-
     //Método de Inserción extraido de BookRepository
     public Books insertBook(Books book){
         return bookRepository.save(book);
@@ -36,9 +35,9 @@ public class BookService {
     }
 
 
-    //Búsqueda por identificador (isbn) creaco con @Query en BookRepository
-    public Books encuentra(Integer isbn){
-        return bookRepository.findByIsbn(isbn);
+    //Búsqueda por identificador (isbn) creado con @Query en BookRepository
+    public List<Books> findByYearQuery(Year year){
+        return bookRepository.findByYearQuery(year);
     }
 
     //Búsqueda por título, relacionado con el método findByTitle creado en BookRepository
@@ -46,14 +45,17 @@ public class BookService {
         return bookRepository.findByTitle(title);
     }
 
-    public List<Books> findByYear(Year year){
-        return bookRepository.findByYear(year);
+    //Búsqueda por año, relacionado con el método findByYear creado en BookRepository
+    public List<Books> findByYearGreaterThan(Year year){
+        return bookRepository.findByYearGreaterThan(year);
     }
 
+    //Búsqueda por Editorial, relacionado con el método findByPublisher creado en BookRepository
     public List<Books> findByPublisher(String publisherName){
         return bookRepository.findByPublisher(publisherName);
     }
 
+    //Búsqueda por Editorial y año, relacionado con el método findByPublisherAndYear creado en BookRepository
     public List<Books> findByPublisherAndYear(String publisherName, Year year){
         return bookRepository.findByPublisherAndYear(publisherName, year);
     }

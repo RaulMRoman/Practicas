@@ -16,9 +16,7 @@ public class ThematicController {
     //Extracción de los métodos que tiene ThematicService, que a su vez extrajo de ThematicRepository
     @Autowired
     private ThematicService thematicService;
-
     public ThematicController(){
-
     }
 
     //Método post para inserción de temáticas

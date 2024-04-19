@@ -33,28 +33,32 @@ public class BookController {
         return bookService.getBooks();
     }
 
-    //Get para la búsqueda por identificador (isbn) creaco con @Query en BookRepository
-    @GetMapping(path="/isbn={isbn}")
-    public Books findByIsbn(@PathVariable Integer isbn){
-        return bookService.encuentra(isbn);
+    //Get para la búsqueda por identificador (isbn) relacionado con findByIsbn en BookService
+    @GetMapping(path="/yearquery={year}")
+    public List<Books> findByYearQuery(@PathVariable Year year){
+        return bookService.findByYearQuery(year);
     }
 
-    //Get para la búsqueda por título, relacionado con el método findByTitle creado en BookRepository
+    //Get para la búsqueda por título, relacionado findByTitle en BookService
     @GetMapping(path="/title={title}")
     public List<Books> findByTitle(@PathVariable String title){
         return bookService.findByTitle(title);
     }
 
+
+    //Búsqueda por año, relacionado con findByYear en BookService
     @GetMapping(path="/year={year}")
     public List<Books> findByYear(@PathVariable Year year){
-        return bookService.findByYear(year);
+        return bookService.findByYearGreaterThan(year);
     }
 
+    //Búsqueda por Editorial, relacionado con findByPublisher en BookService
     @GetMapping(path="/publisher={publisherName}")
     public List<Books> findByPublisher(@PathVariable String publisherName){
         return bookService.findByPublisher(publisherName);
     }
 
+    //Búsqueda por Editorial y año, relacionado con findByPublisherAndYear en BookService
     @GetMapping(path="/publisher={publisherName}/year={year}")
     public List<Books> findByPublisherAndYear(@PathVariable String publisherName, @PathVariable Year year){
         return bookService.findByPublisherAndYear(publisherName, year);

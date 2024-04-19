@@ -15,6 +15,7 @@ import javax.sql.DataSource;
 import java.util.Objects;
 import java.util.Properties;
 
+//Clase de Configuración de fuente de datos, que recupera los parámetros del application.properties.
 @Configuration
 @EnableTransactionManagement
 public class DataSourceConfiguration {
@@ -28,6 +29,7 @@ public class DataSourceConfiguration {
      */
     @Bean
     public DataSource dataSource() {
+        //Datos recuperados de application.properties
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(Objects.requireNonNull(env.getProperty("db.driver")));
         dataSource.setUrl(env.getProperty("db.url"));
@@ -35,9 +37,7 @@ public class DataSourceConfiguration {
         return dataSource;
     }
 
-    /**
-     * Declare the JPA entity manager factory.
-     */
+
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean entityManagerFactory =
@@ -70,6 +70,7 @@ public class DataSourceConfiguration {
         return entityManagerFactory;
     }
 
+    //Gestor de Transacciones JPA
     /**
      * Declare the transaction manager.
      */
