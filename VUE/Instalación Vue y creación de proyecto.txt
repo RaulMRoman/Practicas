@@ -1,0 +1,172 @@
+Microsoft Windows [Versión 10.0.19045.4170]
+(c) Microsoft Corporation. Todos los derechos reservados.
+
+C:\Users\rgallego>cd..
+
+C:\Users>cd rgallego
+
+C:\Users\rgallego>cd documents
+
+C:\Users\rgallego\Documents>cd practicas
+
+C:\Users\rgallego\Documents\Practicas>cd vue
+
+C:\Users\rgallego\Documents\Practicas\VUE>npm install -g @vue/cli
+npm WARN deprecated @babel/plugin-proposal-nullish-coalescing-operator@7.18.6: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-nullish-coalescing-operator instead.
+npm WARN deprecated @babel/plugin-proposal-class-properties@7.18.6: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-class-properties instead.
+npm WARN deprecated source-map-url@0.4.1: See https://github.com/lydell/source-map-url#deprecated
+npm WARN deprecated urix@0.1.0: Please see https://github.com/lydell/urix#deprecated
+npm WARN deprecated @babel/plugin-proposal-optional-chaining@7.21.0: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-optional-chaining instead.
+npm WARN deprecated resolve-url@0.2.1: https://github.com/lydell/resolve-url#deprecated
+npm WARN deprecated source-map-resolve@0.5.3: See https://github.com/lydell/source-map-resolve#deprecated
+npm WARN deprecated apollo-server-errors@3.3.1: The `apollo-server-errors` package is part of Apollo Server v2 and v3, which are now deprecated (end-of-life October 22nd 2023 and October 22nd 2024, respectively). This package's functionality is now found in the `@apollo/server` package. See https://www.apollographql.com/docs/apollo-server/previous-versions/ for more details.
+npm WARN deprecated apollo-server-plugin-base@3.7.2: The `apollo-server-plugin-base` package is part of Apollo Server v2 and v3, which are now deprecated (end-of-life October 22nd 2023 and October 22nd 2024, respectively). This package's functionality is now found in the `@apollo/server` package. See https://www.apollographql.com/docs/apollo-server/previous-versions/ for more details.
+npm WARN deprecated shortid@2.2.16: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
+npm WARN deprecated apollo-server-env@4.2.1: The `apollo-server-env` package is part of Apollo Server v2 and v3, which are now deprecated (end-of-life October 22nd 2023 and October 22nd 2024, respectively). This package's functionality is now found in the `@apollo/utils.fetcher` package. See https://www.apollographql.com/docs/apollo-server/previous-versions/ for more details.
+npm WARN deprecated apollo-reporting-protobuf@3.4.0: The `apollo-reporting-protobuf` package is part of Apollo Server v2 and v3, which are now deprecated (end-of-life October 22nd 2023 and October 22nd 2024, respectively). This package's functionality is now found in the `@apollo/usage-reporting-protobuf` package. See https://www.apollographql.com/docs/apollo-server/previous-versions/ for more details.
+npm WARN deprecated vue@2.7.16: Vue 2 has reached EOL and is no longer actively maintained. See https://v2.vuejs.org/eol/ for more details.
+npm WARN deprecated apollo-server-types@3.8.0: The `apollo-server-types` package is part of Apollo Server v2 and v3, which are now deprecated (end-of-life October 22nd 2023 and October 22nd 2024, respectively). This package's functionality is now found in the `@apollo/server` package. See https://www.apollographql.com/docs/apollo-server/previous-versions/ for more details.
+npm WARN deprecated apollo-datasource@3.3.2: The `apollo-datasource` package is part of Apollo Server v2 and v3, which are now deprecated (end-of-life October 22nd 2023 and October 22nd 2024, respectively). See https://www.apollographql.com/docs/apollo-server/previous-versions/ for more details.
+npm WARN deprecated subscriptions-transport-ws@0.11.0: The `subscriptions-transport-ws` package is no longer maintained. We recommend you use `graphql-ws` instead. For help migrating Apollo software to `graphql-ws`, see https://www.apollographql.com/docs/apollo-server/data/subscriptions/#switching-from-subscriptions-transport-ws    For general help using `graphql-ws`, see https://github.com/enisdenjo/graphql-ws/blob/master/README.md
+
+added 853 packages in 1m
+
+74 packages are looking for funding
+  run `npm fund` for details
+npm notice
+npm notice New patch version of npm available! 10.5.0 -> 10.5.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v10.5.2
+npm notice Run npm install -g npm@10.5.2 to update!
+npm notice
+
+C:\Users\rgallego\Documents\Practicas\VUE>node --version
+v20.12.2
+
+C:\Users\rgallego\Documents\Practicas\VUE>vue --version
+@vue/cli 5.0.8
+
+C:\Users\rgallego\Documents\Practicas\VUE>vue create vue-abril
+
+
+Vue CLI v5.0.8
+? Please pick a preset: Manually select features
+? Check the features needed for your project: Babel, Router, Vuex
+? Choose a version of Vue.js that you want to start the project with 2.x
+? Use history mode for router? (Requires proper server setup for index fallback in production) No
+? Where do you prefer placing config for Babel, ESLint, etc.? In package.json
+? Save this as a preset for future projects? Yes
+? Save preset as: PresetVue
+
+🎉  Preset PresetVue saved in C:\Users\rgallego\.vuerc
+
+
+Vue CLI v5.0.8
+✨  Creating project in C:\Users\rgallego\Documents\Practicas\VUE\vue-abril.
+⚙️  Installing CLI plugins. This might take a while...
+
+
+added 859 packages, and audited 860 packages in 44s
+
+99 packages are looking for funding
+  run `npm fund` for details
+
+4 moderate severity vulnerabilities
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+🚀  Invoking generators...
+📦  Installing additional dependencies...
+
+
+added 7 packages, and audited 867 packages in 4s
+
+99 packages are looking for funding
+  run `npm fund` for details
+
+4 moderate severity vulnerabilities
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+⚓  Running completion hooks...
+
+📄  Generating README.md...
+
+🎉  Successfully created project vue-abril.
+👉  Get started with the following commands:
+
+ $ cd vue-abril
+ $ npm run serve
+
+
+C:\Users\rgallego\Documents\Practicas\VUE>cd vue-abril
+
+C:\Users\rgallego\Documents\Practicas\VUE\vue-abril>vue add vuetify
+ WARN  There are uncommitted changes in the current repository, it's recommended to commit or stash them first.
+? Still proceed? Yes
+
+📦  Installing vue-cli-plugin-vuetify...
+
+
+added 10 packages, and audited 877 packages in 2s
+
+100 packages are looking for funding
+  run `npm fund` for details
+
+4 moderate severity vulnerabilities
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+✔  Successfully installed plugin: vue-cli-plugin-vuetify
+
+? Choose a preset: Vuetify 2 - Vue CLI (recommended)
+
+🚀  Invoking generator for vue-cli-plugin-vuetify...
+📦  Installing additional dependencies...
+
+
+added 15 packages, and audited 892 packages in 8s
+
+103 packages are looking for funding
+  run `npm fund` for details
+
+4 moderate severity vulnerabilities
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+⚓  Running completion hooks...
+
+✔  Successfully invoked generator for plugin: vue-cli-plugin-vuetify
+ vuetify  Discord community: https://community.vuetifyjs.com
+ vuetify  Github: https://github.com/vuetifyjs/vuetify
+ vuetify  Support Vuetify: https://github.com/sponsors/johnleider
+
+
+C:\Users\rgallego\Documents\Practicas\VUE\vue-abril>npm run serve
+
+> vue-abril@0.1.0 serve
+> vue-cli-service serve
+
+ INFO  Starting development server...
+
+
+ DONE  Compiled successfully in 11054ms                                                                          9:58:07
+
+
+  App running at:
+  - Local:   http://localhost:8080/
+  - Network: http://192.168.1.47:8080/
+
+  Note that the development build is not optimized.
+  To create a production build, run npm run build.
+
