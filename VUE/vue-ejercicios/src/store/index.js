@@ -13,73 +13,73 @@ export default new Vuex.Store({
     albums:[],
     album: {
       id: null,
-      nombre: null
-    }
+      nombre: null,
+      artist: null
+    },
+    //Booleanos para mostrar una u otra vista
+    mostrarArtistas: true,
+    mostrarDiscos:false
   },
   mutations: {
-    addArtist(state, artist){
-      //state.artists = [artist,...state.artists]
-      state.artists.push(artist)
+    //Válidas para ambos tipos (artistas y discos). Source recoge el array al que vamos a entrar
+
+    //Método para añadir un nuevo objeto a array correspondiente
+    addObject(state, {source, object}){
+      const array = state[source]
+      array.push(object)
     },
 
-    editArtist(state, {idBuscado, newName}){
-      //console.log(idBuscado)
-      console.log(state.artists)
-      const idEncontrado = state.artists.find((artistFor) => artistFor.id == idBuscado)
-      console.log(idEncontrado)
+    //Método de edición
+    editObject(state, {source, idBuscado, oldName, newName}){
+      const idEncontrado = state[source].find((objectFor) => objectFor.id == idBuscado)
       idEncontrado.nombre = newName
-      console.log(state.artists)
+
+      /*Pruebas para editar el nombre del artista en el disco.
+      
+      if(source=="artist" && oldName == state.album.artist){
+        state.album.artist = newName
+      }
+
+      Vue.set(state.artists, 0, state.artists[0])
+      Vue.set(state.albums, 0, state.albums[0])*/
+
+      
     },
 
-    deleteArtist(state, idBuscado){
-      const idEncontrado = state.artists.findIndex((artistFor) => artistFor.id == idBuscado)
+    //Método para eliminar un objeto del array.
+    deleteObject(state, {source, idBuscado}){
+      const idEncontrado = state[source].findIndex((objectFor) => objectFor.id == idBuscado)
       if(idEncontrado > -1){
-        state.artists.splice(idEncontrado,1)
+        state[source].splice(idEncontrado,1)
       }
       
-      console.log(state.artists)
-    },
-    addAlbum(state, album){
-      //state.artists = [artist,...state.artists]
-      state.albums.push(album)
+      console.log(state[source])
     },
 
-    editArtist(state, {idBuscado, newName}){
-      //console.log(idBuscado)
-      console.log(state.artists)
-      const idEncontrado = state.artists.find((artistFor) => artistFor.id == idBuscado)
-      console.log(idEncontrado)
-      idEncontrado.nombre = newName
-      console.log(state.artists)
-    },
-
-    deleteArtist(state, idBuscado){
-      const idEncontrado = state.artists.findIndex((artistFor) => artistFor.id == idBuscado)
-      if(idEncontrado > -1){
-        state.artists.splice(idEncontrado,1)
+    //Para cambiar entre la vista de artistas y la de discos
+    changeComponent(state){
+      if(state.mostrarArtistas){
+        state.mostrarArtistas = false
+        state.mostrarDiscos = true
+      }else{
+        state.mostrarArtistas = true
+        state.mostrarDiscos = false
       }
-      
-      console.log(state.artists)
     }
   },
   actions: {
-    actionAddArtist(context, artist){
-      context.commit('addArtist', artist)
+    //Acciones que llaman a los métodos de mutación.
+    actionAddObject(context, {source, object}){
+      context.commit('addObject', {source, object})
     },
-    actionEditArtist(context, {idBuscado, newName}){
-      context.commit('editArtist', {idBuscado, newName})
+    actionEditObject(context, {source, idBuscado, newName}){
+      context.commit('editObject', {source, idBuscado, newName})
     },
-    actionDeleteArtist(context, idBuscado){
-      context.commit('deleteArtist', idBuscado)
+    actionDeleteObject(context, {source, idBuscado}){
+      context.commit('deleteObject', {source, idBuscado})
     },
-    actionAddAlbum(context, album){
-      context.commit('addAlbum', album)
-    },
-    actionEditArtist(context, {idBuscado, newName}){
-      context.commit('editArtist', {idBuscado, newName})
-    },
-    actionDeleteArtist(context, idBuscado){
-      context.commit('deleteArtist', idBuscado)
+    actionChangeComponent(context){
+      context.commit('changeComponent')
     }
   },
   getters: {

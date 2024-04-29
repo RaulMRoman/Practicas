@@ -4,12 +4,8 @@
         <v-row justify="center">
             <v-col cols="12" sm="6" md="4" lg="3" v-for="(movie, key) in classes" :key="key">
                 <!-- <ClassComp :index="newClass.index" :name="newClass.name" :url="newClass.url" /> -->
-                <ClassComp :id="movie.id" 
-            :title="movie.title" 
-            :synopsis="movie.overview" 
-            :vote_average ="movie.vote_average"
-            :vote_count="movie.vote_count"
-            :cover="movie.poster_path" />
+                <ClassComp :id="movie.id" :title="movie.title" :synopsis="movie.overview" :vote_average="movie.vote_average"
+                    :vote_count="movie.vote_count" :cover="movie.poster_path" />
             </v-col>
         </v-row>
     </v-container>
@@ -33,23 +29,25 @@ export default {
     },
     methods: {
         getClasses() {
-            /*fetch(BASEURL)
+            /*Búsqueda de los datos antes de utilizar axios
+            fetch(BASEURL)
                 .then(response => response.json())
                 .then(({results}) => {
                     this.classes = results
                 })*/
 
+            
             const URL = `${BASEURL}discover/movie?&sort_by=popularity.desc&api_key=${APIKEY}&year=2024&page=1`
+
+            //Solicitud Get con la URL incluida para obtener la información
             axios.get(URL)
                 .then(response => {
-                    //this.classes = response.data.results
-                    let {data:{results}} = response
+                    let { data: { results } } = response
                     this.classes = results
-                    //console.log(index)
                     this.classes.map(m => {
-                            m.poster_path = `https://image.tmdb.org/t/p/w185_and_h278_bestv2${m.poster_path}`
-                            return m
-                        })
+                        m.poster_path = `https://image.tmdb.org/t/p/w185_and_h278_bestv2${m.poster_path}`
+                        return m
+                    })
                 })
 
                 .catch((error) => {
