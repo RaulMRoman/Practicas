@@ -6,6 +6,9 @@ import DirectivesView from '../views/DirectivesView.vue'
 import ComputedView from '../views/ComputedView.vue'
 import PropsView from '../views/PropsView.vue'
 import PropsView2 from '../views/PropsView2.vue'
+import PropsView3 from '../views/PropsView3.vue'
+import PropsView4Ref from '../views/PropsView4Ref.vue'
+import Movie from '../components/Movie.vue'
 
 Vue.use(VueRouter)
 
@@ -47,6 +50,21 @@ const routes = [
     path: '/props2',
     name: 'Props2',
     component: PropsView2
+  },
+  {
+    path: '/props3',
+    name: 'Props3',
+    component: PropsView3
+  },
+  {
+    path: '/props4',
+    name: 'Props4Ref',
+    component: PropsView4Ref
+  },
+  {
+    path: '/movie',
+    name: 'Movie',
+    component: Movie
   }
 ]
 

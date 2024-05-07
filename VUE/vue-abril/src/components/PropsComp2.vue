@@ -10,7 +10,8 @@
             :like="movie.like"
             @toggleLike="onToggleLike"
             />
-        <MovieFav v-if="showFav" @hidefav="onHideFav"/>
+        <!--<MovieFav v-if="showFav" @hidefav="onHideFav"/> Ejercicio Anterior, Vídeo 21-->
+        <MovieFav :show.sync="showFav"/>
     </div>
 </template>
 
@@ -58,9 +59,9 @@
                 movieLike.like = data.like
                 this.showFav = data.like
                 
-                setTimeout(() => {
+                /*setTimeout(() => {
                     this.showFav = false
-                }, 1000)
+                }, 1000)*/
             },
             onHideFav(show){
                 this.showFav = show

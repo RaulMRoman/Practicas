@@ -66,6 +66,7 @@
     </v-container>
   </div>
 </template>
+
 <script>
 const source = "artists"
 let contador = 1;
@@ -86,7 +87,7 @@ export default {
       };
       console.log(newArtist)
       this.$store.dispatch('actionAddObject', { source: source, object: newArtist });
-      this.artist.id = ""
+      //this.artist.id = ""
       this.artist.nombre = ""
       contador++
 

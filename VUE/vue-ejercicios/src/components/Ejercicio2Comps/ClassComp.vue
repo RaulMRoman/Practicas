@@ -79,7 +79,7 @@ export default {
   }),
   filters:{
     limitSynopsis(sinopsis){
-      return sinopsis.substring(0,120)+"..."
+      return sinopsis.substring(0,80)+"..."
     },
   }
 }

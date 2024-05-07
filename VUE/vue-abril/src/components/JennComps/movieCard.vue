@@ -1,0 +1,102 @@
+<template>
+    <v-card :id="id| formatId" class="mx-auto my-12" max-width="374" :class="{'movie-like':like}">
+        <v-img height="auto" :src="cover"></v-img>
+        <v-card-title>{{ title | uppercase }}</v-card-title>
+        <v-card-text>
+            <p >{{ synopsis |delimiterText }}</p>
+        </v-card-text>
+        <v-divider class="mx-4"></v-divider>
+        <v-card-actions>
+            <v-btn @click="toggleLike"  :class="btnStatus">
+                <span v-text="like ? 'Favorita ' : 'Agregar a favoritos '"></span>
+                 <v-icon>mdi-thumb-up</v-icon>
+            </v-btn>
+           
+        </v-card-actions>
+    </v-card>
+</template>
+<script>
+
+export default {
+    name: 'moviesCard',
+
+    props: {
+        id: {
+            type: Number,
+            required: true
+        },
+        title: {
+            type: String,
+            required: true
+        },
+        synopsis: {
+            type: String,
+            default: 'No hay sinopsis'
+        },
+        cover: {
+            type: String,
+            required: true
+        },
+        like: {
+            type: Boolean,
+            required: true,
+            default() {
+                return false
+            }
+        }
+    },
+    methods: {
+        toggleLike() {
+
+            let movie = this.$parent.movies.find(movie => movie.id == this.id)
+            movie.like = !this.like;
+            this.$parent.showFav = !this.like;
+
+        }
+    },
+    data:()=>({
+        className:{
+            'btn-like': true,
+            'theme--light':false,
+            myclass:true
+        }
+       
+    }),
+    watch:{
+        like(newVal, oldVal){
+            console.log(newVal, oldVal)
+        }
+    },
+    computed:{
+        btnStatus(){
+           return this.like ? 'btn-like' : ''
+        }
+    },
+    filters:{
+        formatId(value){
+            return `movieCard-${value}`
+        },
+        uppercase(value){
+            return value.toUpperCase();
+        },
+        titleReverse(value){
+            let word = value.split('');
+            return word.reverse().join('');
+        },
+        delimiterText(value){
+            return `${value.substring(0,100)} ...`
+        }
+    }
+
+}
+
+</script>
+<style>
+ .btn-like{
+    border-color:#ef5777 !important ;
+    color:#ef5777 !important ;
+ }
+ .movie-like{
+    box-shadow: inset 0 0 0 4px #eb4d4b !important;
+ }
+</style>
