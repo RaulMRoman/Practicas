@@ -1,7 +1,8 @@
 import random, csv
 import pandas as pd
-import uuid, datetime
+import uuid
 import os
+from datetime import datetime
 
 #Ejercicio1
 
@@ -11,6 +12,7 @@ class Hangman:
     nombre = input("Introduce un nombre para iniciar la partida \n")
     attempts = 0
     acierto = True
+    victory = True
 
     mensajes = ["¡Bien hecho!", "Lo sentimos, esa letra no está incluida en la palabra", "Todas las rondas terminadas. Tu puntuación total es: " ]
     frameSuccess = "=" * len(mensajes[0])
@@ -20,6 +22,7 @@ class Hangman:
     
     #Constructor
     def __init__(self):
+        self.uuid = uuid.uuid4()
         self.username = self.nombre
         self.rounds = 0
         self.points = 0
@@ -28,7 +31,7 @@ class Hangman:
 
     
     #Carga de archivo
-    def load(self, filename="words.csv"):
+    def load(self, filename="./files/words.csv"):
 
         with open(filename, "r") as fichero:
             self.lista = [linea.strip() for linea in fichero]
@@ -36,10 +39,36 @@ class Hangman:
             
     #Inicio Ejercicio 3
 
-    # def save(self, username, puntos):
+    def save(self, id, username, startDate, endDate, score):
 
+        datos = pd.DataFrame({
+                'ID':[id],
+                'Username':[username],
+                'Start Date': [startDate],
+                'End Date':[endDate],
+                'Final Score':[score]
+            })
+
+        if os.path.exists("./files/games.csv"):
+            datos.to_csv('./files/games.csv', mode='a', header=False, index=False)
+        else:
+            datos.to_csv('./files/games.csv', mode='a', header=True, index=False)
         
-        
+    
+    def saveRounds(self, id, word, username, round, tries, victory):
+        datos = pd.DataFrame({
+                'ID':[id],
+                'Word':[word],
+                'Username':[username],
+                'Round': [round],
+                'User Tries':[tries],
+                'Victory':[victory]
+            })
+
+        if os.path.exists("./files/rounds_in_games.csv"):
+            datos.to_csv('./files/rounds_in_games.csv', mode='a', header=False, index=False)
+        else:
+            datos.to_csv('./files/rounds_in_games.csv', mode='a', header=True, index=False)
         
 
         # with open(file, 'w', newline='') as newFile:
@@ -64,13 +93,14 @@ class Hangman:
     #Inicio Ejercicio2    
             
     def playing(self):
+        startDate = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         self.rounds+=1
         
         while(self.rounds<=3):
             print("Ronda " + str(self.rounds))
-            self.rounds+=1
             print("Puntuación actual: " + str(self.points))
             self.working()
+            self.rounds+=1
 
 
         print(self.frameFinished)
@@ -78,18 +108,22 @@ class Hangman:
         print(self.mensajes[2] + str(self.points))
         print(self.frameFinished)
         print(self.frameFinished)
+
+        endDate = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         
         #CREACIÓN Y ESCRITURA DE FICHERO GAMES.CSV
-        datos = pd.DataFrame({
-                'ID':[uuid.uuid4()],
-                'Username':[self.username],
-                'Puntuación':[self.points]
-            })
+        self.save(self.uuid, self.username, startDate, endDate, self.points)
 
-        if os.path.exists("games.csv"):
-            datos.to_csv('games.csv', mode='a', header=False, index=False)
-        else:
-            datos.to_csv('games.csv', mode='a', header=True, index=False)
+        # datos = pd.DataFrame({
+        #         'ID':[uuid.uuid4()],
+        #         'Username':[self.username],
+        #         'Puntuación':[self.points]
+        #     })
+
+        # if os.path.exists("games.csv"):
+        #     datos.to_csv('games.csv', mode='a', header=False, index=False)
+        # else:
+        #     datos.to_csv('games.csv', mode='a', header=True, index=False)
         
 
         
@@ -129,6 +163,7 @@ class Hangman:
                     wordUnderscore = wordUnderscore[:p] + letter + wordUnderscore[p + 1:]
 
                 
+            
 
             self.hangmanModels(failedTries)
             print("             " + wordUnderscore.upper()+"\n")
@@ -142,19 +177,28 @@ class Hangman:
                 print(self.frameSuccess)
                 print(self.mensajes[0])
                 print(self.frameSuccess)
+
             elif self.acierto==False and letter != "":
                 print(self.frameFailure)
                 print(self.mensajes[1])
                 print(self.frameFailure)
 
+        #Comprobación de si la palabra elegida y la completada coinciden
         if word==wordUnderscore:
-            self.points+=1
+            self.points+=1 #Se añaden puntos
             print("¡Enhorabuena! Has acertado la palabra\n")
+            self.victory = True #Se usará para indicar en el archivo rounds_in_games si hubo victoria en esa ronda
         else:
             print("Lo sentimos, no acertaste. La palabra correcta era: " + word + "\n")
+            self.victory=False #Se usará para indicar en el archivo rounds_in_games si hubo victoria en esa ronda
             
+        #GUARDAR EL FICHERO rounds_in_games
+        self.saveRounds(self.uuid, word, self.username, self.rounds, failedTries, self.victory)
 
 
+
+    #Método que recoge los intentos y aloja una lista con los dibujos de ahorcado que se mostrarán
+    #Dependiendo del número de intentos, se recuperará una posición (y dibujo) diferente de la lista 
     def hangmanModels(self, attempts):
         models = [
             """
@@ -228,7 +272,6 @@ class Hangman:
     #Fin Ejercicio 2
 
     
-
         
         
 #Excepción personalizada que usaremos si el conteo de cartas es insuficiente
