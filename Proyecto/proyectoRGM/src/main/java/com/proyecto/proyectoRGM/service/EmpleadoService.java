@@ -26,4 +26,11 @@ public class EmpleadoService {
         return empleadoRepository.save(empleado);
     }
 
+    public void deleteEmpleadoPorId(int id){
+        empleadoRepository.deleteById(id);
+    }
+
+    public void deleteEmpleado(Empleados empleado){
+        empleadoRepository.delete(empleado);
+    }
 }
