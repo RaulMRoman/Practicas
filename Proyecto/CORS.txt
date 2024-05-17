@@ -1,0 +1,1 @@
+CORS: //@CrossOrigin(origins = "http://localhost:3000")

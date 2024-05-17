@@ -1,9 +1,15 @@
-package com.proyecto.proyectoRGM;
+package com.proyecto.proyectoRGM.entities;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(
@@ -27,6 +33,8 @@ public class Proyectos {
     )
     private int idProyecto;
 
+    @NotBlank(message = "El campo Descripción no puede estar vacío")
+    @Size(message = "El campo Descripción debe tener un máximo de 125 caracteres")
     @Column(
             name="TX_DESCRIPCIÓN",
             nullable=false,
@@ -34,6 +42,9 @@ public class Proyectos {
     )
     private String descripcion;
 
+    //@Pattern(regexp="^\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$", message = "El formato debe ser YYYY-MM-DD")
+    //@DateTimeFormat(pattern = "YYYY-MM-DD")
+    //@NotBlank(message = "El campo Fecha de Inicio no puede estar vacío")
     @Column(
             name="F_INICIO",
             nullable=false,
@@ -41,29 +52,39 @@ public class Proyectos {
     )
     private LocalDate fechaInicio;
 
+    //@Pattern(regexp="^\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$", message = "El formato debe ser YYYY-MM-DD")
+    //@DateTimeFormat(pattern = "YYYY-MM-DD")
     @Column(
             name="F_FIN",
             columnDefinition = "DATE"
     )
     private LocalDate fechaFin;
 
+    //@Pattern(regexp="^\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$", message = "El formato debe ser YYYY-MM-DD")
+    //@DateTimeFormat(pattern = "YYYY-MM-DD")
     @Column(
             name="F_BAJA",
             columnDefinition = "DATE"
     )
     private LocalDate fechaBaja;
 
+    @Size(message = "El campo Lugar debe tener un máximo de 30 caracteres")
     @Column(
             name="TX_LUGAR",
             columnDefinition = "TEXT"
     )
     private String lugar;
 
+    @Size(message = "El campo Observaciones debe tener un máximo de 300 caracteres")
     @Column(
             name="TX_OBSERVACIONES",
             columnDefinition = "TEXT"
     )
     private String observaciones;
+
+    //RELACIÓN ENTRE TABLAS. PROBAR.
+    /*@ManyToMany(mappedBy = "proyectos")
+    private Set<Empleados> empleados = new HashSet<>();*/
 
     public Proyectos(){
 
@@ -131,5 +152,28 @@ public class Proyectos {
 
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
+    }
+
+    //RELACIÓN ENTRE TABLAS. PROBAR.
+    /*public Set<Empleados> getEmpleados() {
+        return empleados;
+    }
+
+    public void setEmpleados(Set<Empleados> empleados) {
+        this.empleados = empleados;
+    }*/
+
+    @Override
+    public String toString() {
+        return "Proyectos{" +
+                "idProyecto=" + idProyecto +
+                ", descripcion='" + descripcion + '\'' +
+                ", fechaInicio=" + fechaInicio +
+                ", fechaFin=" + fechaFin +
+                ", fechaBaja=" + fechaBaja +
+                ", lugar='" + lugar + '\'' +
+                ", observaciones='" + observaciones + '\'' +
+                //", empleados=" + empleados +
+                '}';
     }
 }

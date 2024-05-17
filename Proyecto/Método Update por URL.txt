@@ -1,0 +1,11 @@
+try{
+            const nif = this.nif
+            const fechaBaja = this.fechaBaja
+              const URL = `http://localhost:8080/empleados/insert`
+              axios.put(`http://localhost:8080/empleados?update/nif=${nif}&date=${fechaBaja}`)
+              this.$router.push('/employees')
+          
+          }catch{
+            console.log("Hola3")
+            console.error("Error al guardar: ", error)
+          }

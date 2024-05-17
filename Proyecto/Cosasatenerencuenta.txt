@@ -1,0 +1,4 @@
+objetos: @RequestBody
+dos o más parámetros: @RequestParam
+
+Consultar id embebido para las asociaciones

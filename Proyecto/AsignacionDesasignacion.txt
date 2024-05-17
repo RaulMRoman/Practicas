@@ -1,0 +1,5 @@
+Para asignar hay que hacer una petición con los id de empleado y de proyecto.
+
+Para desasignar también necesitamos los id de empleado y de proyecto.
+
+Consejo: Enviar sólo la información que va a ser necesaria.
