@@ -1,11 +1,10 @@
 package com.proyecto.proyectoRGM.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -15,7 +14,7 @@ import java.util.Set;
 @Table(
         name="pr_proyectos"
 )
-public class Proyectos {
+public class Project {
 
     @Id
     @SequenceGenerator(
@@ -31,7 +30,7 @@ public class Proyectos {
             name = "ID_PROYECTO",
             updatable = false
     )
-    private int idProyecto;
+    private Integer idProyecto;
 
     @NotBlank(message = "El campo Descripción no puede estar vacío")
     @Size(message = "El campo Descripción debe tener un máximo de 125 caracteres")
@@ -84,12 +83,16 @@ public class Proyectos {
 
     //RELACIÓN ENTRE TABLAS. PROBAR.
     /*@ManyToMany(mappedBy = "proyectos")
-    private Set<Empleados> empleados = new HashSet<>();*/
+    private Set<Employee> empleados = new HashSet<>();*/
 
-    public Proyectos(){
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference
+    private Set<EmployeeProject> employeeProjectSet = new HashSet<>();
+
+    public Project(){
 
     }
-    public Proyectos(String descripcion, LocalDate fechaInicio, LocalDate fechaFin, LocalDate fechaBaja, String lugar, String observaciones) {
+    public Project(String descripcion, LocalDate fechaInicio, LocalDate fechaFin, LocalDate fechaBaja, String lugar, String observaciones) {
         this.descripcion = descripcion;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
@@ -98,11 +101,11 @@ public class Proyectos {
         this.observaciones = observaciones;
     }
 
-    public int getIdProyecto() {
+    public Integer getIdProyecto() {
         return idProyecto;
     }
 
-    public void setIdProyecto(int idProyecto) {
+    public void setIdProyecto(Integer idProyecto) {
         this.idProyecto = idProyecto;
     }
 
@@ -155,17 +158,25 @@ public class Proyectos {
     }
 
     //RELACIÓN ENTRE TABLAS. PROBAR.
-    /*public Set<Empleados> getEmpleados() {
+    /*public Set<Employee> getEmpleados() {
         return empleados;
     }
 
-    public void setEmpleados(Set<Empleados> empleados) {
+    public void setEmpleados(Set<Employee> empleados) {
         this.empleados = empleados;
     }*/
 
+    public Set<EmployeeProject> getEmployeeProjectSet() {
+        return employeeProjectSet;
+    }
+
+    public void setEmployeeProjectSet(Set<EmployeeProject> employeeProjectSet) {
+        this.employeeProjectSet = employeeProjectSet;
+    }
+
     @Override
     public String toString() {
-        return "Proyectos{" +
+        return "Project{" +
                 "idProyecto=" + idProyecto +
                 ", descripcion='" + descripcion + '\'' +
                 ", fechaInicio=" + fechaInicio +

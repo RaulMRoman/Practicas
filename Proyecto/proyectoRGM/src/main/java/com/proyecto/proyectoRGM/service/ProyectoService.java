@@ -1,7 +1,6 @@
 package com.proyecto.proyectoRGM.service;
 
-import com.proyecto.proyectoRGM.entities.Empleados;
-import com.proyecto.proyectoRGM.entities.Proyectos;
+import com.proyecto.proyectoRGM.entities.Project;
 import com.proyecto.proyectoRGM.repositories.ProyectoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,12 +21,12 @@ public class ProyectoService {
     public ProyectoService(){
     }
 
-    public List<Proyectos> getProyectos(){
+    public List<Project> getProyectos(){
 
-        List<Proyectos> lista = proyectoRepository.findAll();
-        List<Proyectos> listaModificada = new ArrayList<>();
+        List<Project> lista = proyectoRepository.findAll();
+        List<Project> listaModificada = new ArrayList<>();
 
-        for(Proyectos e: lista) {
+        for(Project e: lista) {
 
             if (e.getFechaBaja() == null) {
                 listaModificada.add(e);
@@ -37,12 +35,12 @@ public class ProyectoService {
         return listaModificada;
     }
 
-    public ResponseEntity<Proyectos> insertProyecto(@RequestBody Proyectos proyecto){
-        return new ResponseEntity<Proyectos>(proyectoRepository.save(proyecto), HttpStatus.OK);
+    public ResponseEntity<Project> insertProyecto(@RequestBody Project proyecto){
+        return new ResponseEntity<Project>(proyectoRepository.save(proyecto), HttpStatus.OK);
     }
 
-    public Proyectos deleteProyectoPorId(int id){
-        Proyectos project = proyectoRepository.findById(id);
+    public Project deleteProyectoPorId(int id){
+        Project project = proyectoRepository.findById(id);
 
         if(project!=null){
             project.setFechaBaja(LocalDate.now());

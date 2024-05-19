@@ -1,11 +1,11 @@
 package com.proyecto.proyectoRGM.repositories;
 
-import com.proyecto.proyectoRGM.entities.Proyectos;
+import com.proyecto.proyectoRGM.entities.Project;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProyectoRepository extends JpaRepository<Proyectos, Integer> {
+public interface ProyectoRepository extends JpaRepository<Project, Integer> {
 
-    Proyectos findById(int id);
+    Project findById(int id);
 }

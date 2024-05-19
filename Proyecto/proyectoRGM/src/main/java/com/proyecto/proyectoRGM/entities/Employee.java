@@ -1,11 +1,9 @@
 package com.proyecto.proyectoRGM.entities;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,7 +11,7 @@ import java.util.Set;
 @Table(
         name = "em_empleados"
 )
-public class Empleados {
+public class Employee {
 
     @Id
     @SequenceGenerator(
@@ -29,7 +27,7 @@ public class Empleados {
             name = "ID_EMPLEADO",
             updatable = false
     )
-    private int idEmpleado;
+    private Integer idEmpleado;
 
 
     @NotBlank(message = "El campo NIF no puede estar vacío")
@@ -156,17 +154,21 @@ public class Empleados {
             joinColumns = @JoinColumn(name="idEmpleado"),
             inverseJoinColumns = @JoinColumn(name="idProyecto")
     )
-    private Set<Proyectos> proyectos = new HashSet<>();*/
+    private Set<Project> proyectos = new HashSet<>();*/
+
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference
+    private Set<EmployeeProject> employeeProjectSet = new HashSet<>();
 
 
     //Constructor por defecto
-    public Empleados(){
+    public Employee(){
 
     }
 
     //Constructor con parámetros
 
-    public Empleados(String nif, String nombre, String primerApellido, String segundoApellido, java.sql.Date fNacimiento, String telefonoUno, String telefonoDos, String email, java.sql.Date fechaAlta, java.sql.Date fechaBaja, String estadoCivil, String servMilitar) {
+    public Employee(String nif, String nombre, String primerApellido, String segundoApellido, java.sql.Date fNacimiento, String telefonoUno, String telefonoDos, String email, java.sql.Date fechaAlta, java.sql.Date fechaBaja, String estadoCivil, String servMilitar) {
         this.nif = nif;
         this.nombre = nombre;
         this.primerApellido = primerApellido;
@@ -181,11 +183,11 @@ public class Empleados {
         this.servMilitar = servMilitar;
     }
 
-    public int getIdEmpleado() {
+    public Integer getIdEmpleado() {
         return idEmpleado;
     }
 
-    public void setIdEmpleado(int idEmpleado) {
+    public void setIdEmpleado(Integer idEmpleado) {
         this.idEmpleado = idEmpleado;
     }
 
@@ -285,18 +287,26 @@ public class Empleados {
         this.servMilitar = servMilitar;
     }
 
+    public Set<EmployeeProject> getEmployeeProjectSet() {
+        return employeeProjectSet;
+    }
+
+    public void setEmployeeProjectSet(Set<EmployeeProject> employeeProjectSet) {
+        this.employeeProjectSet = employeeProjectSet;
+    }
+
     //PARA RELACIÓN ENTRE TABLAS. PROBAR.
-    /*public Set<Proyectos> getProyectos() {
+    /*public Set<Project> getProyectos() {
         return proyectos;
     }
 
-    public void setProyectos(Set<Proyectos> proyectos) {
+    public void setProyectos(Set<Project> proyectos) {
         this.proyectos = proyectos;
     }*/
 
     @Override
     public String toString() {
-        return "Empleados{" +
+        return "Employee{" +
                 "idEmpleado=" + idEmpleado +
                 ", nif='" + nif + '\'' +
                 ", nombre='" + nombre + '\'' +

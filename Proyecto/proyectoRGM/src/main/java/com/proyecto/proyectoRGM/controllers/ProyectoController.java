@@ -1,6 +1,6 @@
 package com.proyecto.proyectoRGM.controllers;
 
-import com.proyecto.proyectoRGM.entities.Proyectos;
+import com.proyecto.proyectoRGM.entities.Project;
 import com.proyecto.proyectoRGM.service.ProyectoService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +18,12 @@ public class ProyectoController {
     private ProyectoService proyectoService;
 
     @GetMapping
-    public List<Proyectos> getProyectos(){
+    public List<Project> getProyectos(){
         return proyectoService.getProyectos();
     }
 
     @PostMapping("/insert")
-    public ResponseEntity<Proyectos> insertProyecto(@RequestBody Proyectos proyecto){
+    public ResponseEntity<Project> insertProyecto(@RequestBody Project proyecto){
         return proyectoService.insertProyecto(proyecto);
     }
 

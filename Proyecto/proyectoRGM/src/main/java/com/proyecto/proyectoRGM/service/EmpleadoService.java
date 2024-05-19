@@ -1,9 +1,7 @@
 package com.proyecto.proyectoRGM.service;
 
-import com.proyecto.proyectoRGM.entities.EmpleadoUpdate;
-import com.proyecto.proyectoRGM.entities.Empleados;
+import com.proyecto.proyectoRGM.entities.Employee;
 import com.proyecto.proyectoRGM.repositories.EmpleadoRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.sql.Date;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.Period;
@@ -30,10 +29,10 @@ public class EmpleadoService {
 
     //Todos los siguientes métodos los recogerá EmpleadoController
 
-    public List<Empleados> getEmploymentHistory(){
-        List<Empleados> lista = empleadoRepository.findAll();
+    public List<Employee> getEmploymentHistory(){
+        List<Employee> lista = empleadoRepository.findAll();
 
-        for(Empleados e: lista){
+        for(Employee e: lista){
             if(e.getEstadoCivil().equals("S")){
                 e.setEstadoCivil("Soltero");
             }else if(e.getEstadoCivil().equals("C")){
@@ -51,12 +50,12 @@ public class EmpleadoService {
         return lista;
     }
 
-    public List<Empleados> getEmployees(){
+    public ResponseEntity<List<Employee>> getEmployees(){
 
-        List<Empleados> lista = empleadoRepository.findAll();
-        List<Empleados> listaModificada = new ArrayList<>();
+        List<Employee> lista = empleadoRepository.findAll();
+        List<Employee> listaModificada = new ArrayList<>();
 
-        for(Empleados e: lista){
+        for(Employee e: lista){
             if(e.getEstadoCivil().equals("S")){
                 e.setEstadoCivil("Soltero");
             }else if(e.getEstadoCivil().equals("C")){
@@ -74,17 +73,15 @@ public class EmpleadoService {
             }
         }
 
-
-        /*List<Empleados> lista2= new ArrayList<>();
         try{
-             lista2 = empleadoRepository.listaDeEmpleadosLola("Raúl");
+            return new ResponseEntity<>(listaModificada, HttpStatus.OK);
         }catch(Exception e){
             e.printStackTrace();
+            return new ResponseEntity<>(listaModificada, HttpStatus.BAD_REQUEST);
         }
-        return lista2;*/
-        return listaModificada;
+
     }
-    public ResponseEntity<Object> insertEmpleado(@RequestBody Empleados empleado){
+    public ResponseEntity<Object> insertEmpleado(@RequestBody Employee empleado){
 
         //Validación de Edad
         int years = 0;
@@ -94,23 +91,23 @@ public class EmpleadoService {
             LocalDate now = LocalDate.now();
             years = Period.between(birth, now).getYears();
             if(years < 18){
-                throw new Exception("La diferencia es menor a 18 años: " + years);
+                throw new IllegalArgumentException("La diferencia es menor a 18 años: " + years);
             }else if(years > 67){
-                throw new Exception("La diferencia es mayor de 67 años: " + years);
+                throw new IllegalArgumentException("La diferencia es mayor de 67 años: " + years);
             }
             else{
-                Empleados save = empleadoRepository.save(empleado);
+                Employee save = empleadoRepository.save(empleado);
                 return new ResponseEntity<>(save, HttpStatus.OK);
             }
-        }catch(ParseException e){
-            System.out.println("Error al analizar las fechas " + e.getMessage());
-            return new ResponseEntity<>("Error al analizar las fechas: ", HttpStatus.EXPECTATION_FAILED);
-        }catch(Exception e){
-            System.err.println("Error:" + e.getMessage());
+        }catch(IllegalArgumentException e){
+                return new ResponseEntity<>(e.getMessage() , HttpStatus.EXPECTATION_FAILED);
+
+        }catch(Exception e2){
+            return new ResponseEntity<>("El empleado no se ha podido insertar: (NIF " + empleado.getNif() + " ya registrado)",
+                    HttpStatus.EXPECTATION_FAILED);
         }
 
-        return new ResponseEntity<>("El empleado no se ha podido insertar: (Tiene " + years + " años)",
-                HttpStatus.EXPECTATION_FAILED);
+
     }
 
 
@@ -118,17 +115,17 @@ public class EmpleadoService {
         empleadoRepository.deleteById(id);
     }
 
-    public void deleteEmpleado(Empleados empleado){
+    public void deleteEmpleado(Employee empleado){
         empleadoRepository.delete(empleado);
     }
 
     //EXCEPCIÓN FECHA DATA INTEGRITY
 
     //@Transactional
-    public Empleados editFechaBaja(String nif){
+    public Employee editFechaBaja(String nif){
         //empleadoRepository.updatefechaBajaByNif(empleadoUpdate.getNif(), empleadoUpdate.getDate());
 
-        Empleados employee = empleadoRepository.findByNif(nif);
+        Employee employee = empleadoRepository.findByNif(nif);
 
         if(employee!=null){
             employee.setFechaBaja(Date.valueOf(LocalDate.now()));

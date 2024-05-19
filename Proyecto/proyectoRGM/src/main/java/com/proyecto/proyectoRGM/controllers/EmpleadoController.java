@@ -1,14 +1,12 @@
 package com.proyecto.proyectoRGM.controllers;
 
-import com.proyecto.proyectoRGM.entities.EmpleadoUpdate;
-import com.proyecto.proyectoRGM.entities.Empleados;
+import com.proyecto.proyectoRGM.entities.Employee;
 import com.proyecto.proyectoRGM.service.EmpleadoService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
 import java.util.List;
 
 @RestController
@@ -21,18 +19,18 @@ public class EmpleadoController {
     private EmpleadoService empleadoService;
 
     @GetMapping(path="/history")
-    public List<Empleados> getEmploymentHistory(){
+    public List<Employee> getEmploymentHistory(){
         return empleadoService.getEmploymentHistory();
     }
 
     @GetMapping
-    public List<Empleados> getEmployees(){
+    public ResponseEntity<List<Employee>> getEmployees(){
         return empleadoService.getEmployees();
     }
 
     @PostMapping(path="/insert")
     public ResponseEntity<Object> insertEmpleado(
-            @RequestBody Empleados empleado){
+            @RequestBody Employee empleado){
         return empleadoService.insertEmpleado(empleado);
     }
 

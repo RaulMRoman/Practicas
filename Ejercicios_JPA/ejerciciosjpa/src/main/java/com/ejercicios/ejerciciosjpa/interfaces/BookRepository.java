@@ -32,6 +32,7 @@ public interface BookRepository extends JpaRepository<Books, Integer> {
     List<Books> findByPublisherAndYear(String name, Year year);
 
 
+
     //Método de búsqueda añadido en la interfaz a través de nombre de método (buscar por título)
     List<Books> findByTitle(String title);
 
