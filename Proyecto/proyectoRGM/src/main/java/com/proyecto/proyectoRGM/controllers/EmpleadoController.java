@@ -29,7 +29,7 @@ public class EmpleadoController {
     }
 
     @PostMapping(path="/insert")
-    public ResponseEntity<Object> insertEmpleado(
+    public ResponseEntity<String> insertEmpleado(
             @RequestBody Employee empleado){
         return empleadoService.insertEmpleado(empleado);
     }

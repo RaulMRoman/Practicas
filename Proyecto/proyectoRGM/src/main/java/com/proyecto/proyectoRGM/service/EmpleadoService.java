@@ -81,7 +81,7 @@ public class EmpleadoService {
         }
 
     }
-    public ResponseEntity<Object> insertEmpleado(@RequestBody Employee empleado){
+    public ResponseEntity<String> insertEmpleado(@RequestBody Employee empleado){
 
         //Validación de Edad
         int years = 0;
@@ -96,8 +96,8 @@ public class EmpleadoService {
                 throw new IllegalArgumentException("La diferencia es mayor de 67 años: " + years);
             }
             else{
-                Employee save = empleadoRepository.save(empleado);
-                return new ResponseEntity<>(save, HttpStatus.OK);
+                Employee employeeSave = empleadoRepository.save(empleado);
+                return new ResponseEntity<>(employeeSave.toString(), HttpStatus.OK);
             }
         }catch(IllegalArgumentException e){
                 return new ResponseEntity<>(e.getMessage() , HttpStatus.EXPECTATION_FAILED);

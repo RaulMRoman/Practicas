@@ -1,6 +1,6 @@
 <template>
   <v-app id="inspire">
-      <v-navigation-drawer
+      <v-navigation-drawer class="blue lighten-4"
           v-model="drawer"
           app>
     <v-list-item>
@@ -37,8 +37,8 @@
     </v-list>
   </v-navigation-drawer>
 
-    <v-app-bar app>
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+    <v-app-bar class="blue lighten-4" app>
+      <v-app-bar-nav-icon class="black" dark @click="drawer = !drawer"></v-app-bar-nav-icon>
 
       <v-toolbar-title>Empleados y Proyectos</v-toolbar-title>
     </v-app-bar>
